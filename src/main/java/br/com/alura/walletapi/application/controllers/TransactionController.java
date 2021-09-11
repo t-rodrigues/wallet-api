@@ -1,4 +1,4 @@
-package br.com.alura.walletapi.application.controller;
+package br.com.alura.walletapi.application.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
