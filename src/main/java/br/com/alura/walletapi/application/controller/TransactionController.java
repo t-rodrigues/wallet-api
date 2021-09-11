@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public void create(@RequestBody TransactionFormDto transaction) {
+    public void create(@RequestBody @Valid TransactionFormDto transaction) {
         transactions.add(modelMapper.map(transaction, Transaction.class));
     }
 
