@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.alura.walletapi.domain.User;
+import br.com.alura.walletapi.domain.entities.User;
 
 @Repository
 public class UserRepository {

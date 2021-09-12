@@ -2,7 +2,7 @@ package br.com.alura.walletapi.application.dtos;
 
 import java.math.BigDecimal;
 
-import br.com.alura.walletapi.domain.enums.TransactionType;
+import br.com.alura.walletapi.domain.entities.enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 

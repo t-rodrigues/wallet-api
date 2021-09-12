@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.*;
 
-import br.com.alura.walletapi.domain.enums.TransactionType;
+import br.com.alura.walletapi.domain.entities.enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 

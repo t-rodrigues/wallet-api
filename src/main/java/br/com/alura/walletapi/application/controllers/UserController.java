@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
 import br.com.alura.walletapi.application.dtos.UserResponseDto;
-import br.com.alura.walletapi.services.UserService;
+import br.com.alura.walletapi.domain.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

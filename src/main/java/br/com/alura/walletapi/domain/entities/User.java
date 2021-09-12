@@ -1,4 +1,4 @@
-package br.com.alura.walletapi.domain;
+package br.com.alura.walletapi.domain.entities;
 
 import lombok.Getter;
 import lombok.Setter;

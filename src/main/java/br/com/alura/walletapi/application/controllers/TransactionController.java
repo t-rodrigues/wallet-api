@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.alura.walletapi.application.dtos.TransactionFormDto;
 import br.com.alura.walletapi.application.dtos.TransactionResponseDto;
-import br.com.alura.walletapi.services.TransactionService;
+import br.com.alura.walletapi.domain.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package br.com.alura.walletapi.services;
+package br.com.alura.walletapi.domain.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.walletapi.application.dtos.TransactionFormDto;
 import br.com.alura.walletapi.application.dtos.TransactionResponseDto;
-import br.com.alura.walletapi.domain.Transaction;
+import br.com.alura.walletapi.domain.entities.Transaction;
 import br.com.alura.walletapi.infra.repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 

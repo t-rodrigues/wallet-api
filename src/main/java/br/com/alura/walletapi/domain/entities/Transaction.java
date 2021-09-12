@@ -1,9 +1,9 @@
-package br.com.alura.walletapi.domain;
+package br.com.alura.walletapi.domain.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.alura.walletapi.domain.enums.TransactionType;
+import br.com.alura.walletapi.domain.entities.enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 

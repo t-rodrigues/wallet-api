@@ -1,4 +1,4 @@
-package br.com.alura.walletapi.services;
+package br.com.alura.walletapi.domain.services;
 
 import java.util.List;
 import java.util.Random;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
 import br.com.alura.walletapi.application.dtos.UserResponseDto;
-import br.com.alura.walletapi.domain.User;
+import br.com.alura.walletapi.domain.entities.User;
 import br.com.alura.walletapi.infra.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 

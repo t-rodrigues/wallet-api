@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.alura.walletapi.domain.Transaction;
+import br.com.alura.walletapi.domain.entities.Transaction;
 
 @Repository
 public class TransactionRepository {
