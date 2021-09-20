@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.alura.walletapi.application.dtos.TransactionFormDto;
 import br.com.alura.walletapi.application.dtos.TransactionResponseDto;
@@ -16,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class TransactionService {
 
-    private ModelMapper modelMapper = new ModelMapper();
-
     private final TransactionRepository transactionRepository;
+
+    private ModelMapper modelMapper = new ModelMapper();
 
     public List<TransactionResponseDto> getTransactions() {
         var transactions = transactionRepository.findAll();
@@ -27,8 +28,10 @@ public class TransactionService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void createTransaction(TransactionFormDto transactionFormDto) {
         Transaction transaction = modelMapper.map(transactionFormDto, Transaction.class);
+        transaction.setId(null);
 
         transactionRepository.save(transaction);
     }
