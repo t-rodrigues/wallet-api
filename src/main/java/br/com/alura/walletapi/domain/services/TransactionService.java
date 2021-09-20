@@ -23,12 +23,12 @@ public class TransactionService {
     public List<TransactionResponseDto> getTransactions() {
         var transactions = transactionRepository.findAll();
 
-        return transactions.stream().map(t -> modelMapper.map(t, TransactionResponseDto.class))
+        return transactions.stream().map(transaction -> modelMapper.map(transaction, TransactionResponseDto.class))
                 .collect(Collectors.toList());
     }
 
     public void createTransaction(TransactionFormDto transactionFormDto) {
-        var transaction = modelMapper.map(transactionFormDto, Transaction.class);
+        Transaction transaction = modelMapper.map(transactionFormDto, Transaction.class);
 
         transactionRepository.save(transaction);
     }
