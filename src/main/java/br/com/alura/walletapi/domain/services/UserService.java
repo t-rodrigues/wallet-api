@@ -1,10 +1,10 @@
 package br.com.alura.walletapi.domain.services;
 
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
@@ -21,10 +21,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public List<UserResponseDto> getUsers() {
-        var users = userRepository.findAll();
+    public Page<UserResponseDto> getUsers(Pageable pagination) {
+        Page<User> users = userRepository.findAll(pagination);
 
-        return users.stream().map(user -> modelMapper.map(user, UserResponseDto.class)).collect(Collectors.toList());
+        return users.map(user -> modelMapper.map(user, UserResponseDto.class));
     }
 
     public void createUser(UserFormDto userFormDto) {

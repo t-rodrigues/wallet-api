@@ -1,7 +1,8 @@
 package br.com.alura.walletapi.application.controllers;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
@@ -17,8 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserResponseDto> getUsers() {
-        return userService.getUsers();
+    public Page<UserResponseDto> getUsers(@PageableDefault(size = 10) Pageable pagination) {
+        return userService.getUsers(pagination);
     }
 
     @PostMapping
