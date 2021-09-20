@@ -3,7 +3,12 @@ package br.com.alura.walletapi.application.dtos;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 import br.com.alura.walletapi.domain.entities.enums.TransactionType;
 import lombok.Getter;
@@ -26,6 +31,10 @@ public class TransactionFormDto {
     @Positive
     private Integer quantity;
 
+    @NotNull
     private TransactionType type;
+
+    @JsonAlias("user_id")
+    private Long userId;
 
 }

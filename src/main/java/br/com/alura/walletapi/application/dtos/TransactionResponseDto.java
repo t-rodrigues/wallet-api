@@ -14,5 +14,6 @@ public class TransactionResponseDto {
     private BigDecimal price;
     private Integer quantity;
     private TransactionType type;
+    private UserResponseDto user;
 
 }
