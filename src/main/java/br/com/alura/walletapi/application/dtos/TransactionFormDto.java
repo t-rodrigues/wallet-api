@@ -3,10 +3,7 @@ package br.com.alura.walletapi.application.dtos;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
@@ -20,6 +17,7 @@ public class TransactionFormDto {
 
     @NotNull
     @Size(min = 5, max = 6)
+    @Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?")
     private String ticker;
 
     @PastOrPresent
