@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
 import br.com.alura.walletapi.application.dtos.UserResponseDto;
@@ -27,6 +28,7 @@ public class UserService {
         return users.map(user -> modelMapper.map(user, UserResponseDto.class));
     }
 
+    @Transactional
     public UserResponseDto createUser(UserFormDto userFormDto) {
         User user = modelMapper.map(userFormDto, User.class);
         String password = new Random().nextInt(99999) + "";
