@@ -27,12 +27,14 @@ public class UserService {
         return users.map(user -> modelMapper.map(user, UserResponseDto.class));
     }
 
-    public void createUser(UserFormDto userFormDto) {
-        User newUser = modelMapper.map(userFormDto, User.class);
+    public UserResponseDto createUser(UserFormDto userFormDto) {
+        User user = modelMapper.map(userFormDto, User.class);
         String password = new Random().nextInt(99999) + "";
 
-        newUser.setPassword(password);
-        userRepository.save(newUser);
+        user.setPassword(password);
+        userRepository.save(user);
+
+        return modelMapper.map(user, UserResponseDto.class);
     }
 
 }

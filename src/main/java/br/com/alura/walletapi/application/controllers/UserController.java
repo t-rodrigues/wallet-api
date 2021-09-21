@@ -1,9 +1,13 @@
 package br.com.alura.walletapi.application.controllers;
 
+import java.net.URI;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.walletapi.application.dtos.UserFormDto;
 import br.com.alura.walletapi.application.dtos.UserResponseDto;
@@ -23,8 +27,13 @@ public class UserController {
     }
 
     @PostMapping
-    public void createUser(@RequestBody UserFormDto user) {
-        userService.createUser(user);
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserFormDto userFormDto,
+            UriComponentsBuilder uriBuilder) {
+        UserResponseDto user = userService.createUser(userFormDto);
+
+        URI location = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
+
+        return ResponseEntity.created(location).body(user);
     }
 
 }
