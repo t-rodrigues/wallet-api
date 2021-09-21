@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class TransactionResponseDto {
 
+    private Long id;
     private String ticker;
     private BigDecimal price;
     private Integer quantity;
