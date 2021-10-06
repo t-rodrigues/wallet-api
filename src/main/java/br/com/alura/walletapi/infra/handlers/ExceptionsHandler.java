@@ -22,7 +22,7 @@ public class ExceptionsHandler {
 
         ex.getFieldErrors().forEach(f -> error.addError(f.getField(), f.getDefaultMessage()));
 
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(error);
     }
 
     @ExceptionHandler(Exception.class)
