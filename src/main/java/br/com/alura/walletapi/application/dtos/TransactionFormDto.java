@@ -1,18 +1,21 @@
 package br.com.alura.walletapi.application.dtos;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import br.com.alura.walletapi.domain.entities.enums.TransactionType;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
-import br.com.alura.walletapi.domain.entities.enums.TransactionType;
-import lombok.Getter;
-import lombok.Setter;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TransactionFormDto {
 
     @NotNull
