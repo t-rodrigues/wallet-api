@@ -33,7 +33,7 @@ class TransactionServiceTest {
     @InjectMocks
     private TransactionService transactionService;
 
-    private long validUserId;
+    private long validUserId = 1L;
     private long invalidUserId = 666L;
 
     @Test

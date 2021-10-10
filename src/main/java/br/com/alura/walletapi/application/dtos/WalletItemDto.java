@@ -1,14 +1,21 @@
 package br.com.alura.walletapi.application.dtos;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Getter
-@AllArgsConstructor
 public class WalletItemDto {
 
     private String ticker;
     private Long quantity;
-    private Double percent;
+    private BigDecimal percent;
+
+    public WalletItemDto(String ticker, Long quantity, Double percent) {
+        this.ticker = ticker;
+        this.quantity = quantity;
+        this.percent = BigDecimal.valueOf(percent).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP);
+    }
 
 }
