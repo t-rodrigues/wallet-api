@@ -1,7 +1,6 @@
 package br.com.alura.walletapi.domain.services;
 
 import br.com.alura.walletapi.application.dtos.TransactionFormDto;
-import br.com.alura.walletapi.application.dtos.TransactionResponseDto;
 import br.com.alura.walletapi.domain.entities.enums.TransactionType;
 import br.com.alura.walletapi.infra.repositories.TransactionRepository;
 import br.com.alura.walletapi.infra.repositories.UserRepository;
@@ -33,15 +32,15 @@ class TransactionServiceTest {
     @InjectMocks
     private TransactionService transactionService;
 
-    private long validUserId = 1L;
-    private long invalidUserId = 666L;
+    private TransactionFormDto createTransactionFormDto(Long userId) {
+        return new TransactionFormDto("ITSA4", LocalDate.now(), BigDecimal.valueOf(10.45), 5, TransactionType.BUY,
+                userId);
+    }
 
     @Test
     void shouldRegisterNewTransaction() {
-        TransactionFormDto transactionFormDto = new TransactionFormDto("ITSA4", LocalDate.now(),
-                BigDecimal.valueOf(10.45), 5, TransactionType.BUY, validUserId);
-
-        TransactionResponseDto transactionResponseDto = transactionService.createTransaction(transactionFormDto);
+        var transactionFormDto = createTransactionFormDto(1L);
+        var transactionResponseDto = transactionService.createTransaction(transactionFormDto);
 
         assertEquals(transactionFormDto.getTicker(), transactionResponseDto.getTicker());
         assertEquals(transactionFormDto.getQuantity(), transactionResponseDto.getQuantity());
@@ -52,12 +51,13 @@ class TransactionServiceTest {
 
     @Test
     void shouldNotRegisterNewTransactionWhenUserIdIsInvalid() {
-        TransactionFormDto transactionFormDto = new TransactionFormDto("ITSA4", LocalDate.now(),
-                BigDecimal.valueOf(10.45), 5, TransactionType.BUY, invalidUserId);
+        var invalidUserId = 666L;
+        var transactionFormDto = createTransactionFormDto(invalidUserId);
 
-        Mockito.when(userRepository.getById(invalidUserId)).thenThrow(EntityNotFoundException.class);
-
-        assertThrows(IllegalArgumentException.class, () -> transactionService.createTransaction(transactionFormDto));
+        Mockito.doThrow(EntityNotFoundException.class).when(userRepository).getById(invalidUserId);
+        assertThrows(IllegalArgumentException.class, () -> {
+            transactionService.createTransaction(transactionFormDto);
+        });
     }
 
 }

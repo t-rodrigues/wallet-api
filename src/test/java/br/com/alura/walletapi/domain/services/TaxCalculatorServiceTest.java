@@ -1,21 +1,33 @@
 package br.com.alura.walletapi.domain.services;
 
 import br.com.alura.walletapi.domain.entities.Transaction;
+import br.com.alura.walletapi.domain.entities.User;
 import br.com.alura.walletapi.domain.entities.enums.TransactionType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaxCalculatorServiceTest {
 
+    private TaxCalculatorService taxCalculatorService;
+
+    private Transaction createTransaction(BigDecimal price, Integer quantity, TransactionType type) {
+        return new Transaction("ITSA4", LocalDate.now(), price, quantity, type, new User(null, null, null));
+    }
+
+    @BeforeEach
+    void setUp() {
+        taxCalculatorService = new TaxCalculatorService();
+    }
+
     @Test
     void shouldNotHaveTaxWhenTransactionTypeIsBuy() {
-        Transaction transaction = new Transaction();
-        transaction.setType(TransactionType.BUY);
+        Transaction transaction = createTransaction(new BigDecimal("30.0"), 10, TransactionType.BUY);
 
-        TaxCalculatorService taxCalculatorService = new TaxCalculatorService();
         BigDecimal tax = taxCalculatorService.calc(transaction);
 
         assertEquals(BigDecimal.ZERO, tax);
@@ -23,12 +35,8 @@ public class TaxCalculatorServiceTest {
 
     @Test
     void shouldNotHaveTaxWhenTransactionAmountIsLessThan20000() {
-        Transaction transaction = new Transaction();
-        transaction.setType(TransactionType.SELL);
-        transaction.setPrice(new BigDecimal("30.0"));
-        transaction.setQuantity(10);
+        Transaction transaction = createTransaction(new BigDecimal("30.0"), 10, TransactionType.SELL);
 
-        TaxCalculatorService taxCalculatorService = new TaxCalculatorService();
         BigDecimal tax = taxCalculatorService.calc(transaction);
 
         assertEquals(BigDecimal.ZERO, tax);
@@ -36,12 +44,8 @@ public class TaxCalculatorServiceTest {
 
     @Test
     void shouldReturnCorrectTaxWhenTransactionAmountIsMoreOrEqualThan20000() {
-        Transaction transaction = new Transaction();
-        transaction.setType(TransactionType.SELL);
-        transaction.setPrice(new BigDecimal("20.0"));
-        transaction.setQuantity(1000);
+        Transaction transaction = createTransaction(new BigDecimal("20.0"), 1000, TransactionType.SELL);
 
-        TaxCalculatorService taxCalculatorService = new TaxCalculatorService();
         BigDecimal tax = taxCalculatorService.calc(transaction);
 
         assertEquals(BigDecimal.valueOf(3000.00).setScale(2), tax);
